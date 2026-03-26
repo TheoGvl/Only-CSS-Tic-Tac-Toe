@@ -1,0 +1,171 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #111827;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+}
+
+.game-container {
+    position: relative;
+    padding: 20px;
+    background: #1f2937;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* 1. Hide the state-controlling checkboxes */
+input[type="checkbox"] {
+    display: none;
+}
+
+/* 2. Build the Grid */
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-template-rows: repeat(3, 120px);
+    gap: 10px;
+    background-color: #374151;
+    border: 10px solid #1f2937;
+    border-radius: 12px;
+}
+
+/* 3. Style the Cells & Labels */
+.cell {
+    background-color: #1f2937;
+    border-radius: 8px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Split each cell into two clickable halves before selection */
+.mark {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.x-mark:hover { background: rgba(59, 130, 246, 0.1); color: rgba(59, 130, 246, 0.5); }
+.o-mark:hover { background: rgba(239, 68, 68, 0.1); color: rgba(239, 68, 68, 0.5); }
+
+
+/* =========================================
+   CELL STATE MANAGEMENT (The "Logic")
+   ========================================= */
+
+/* When X is checked in a cell: Hide O, expand X to fill cell, make text visible */
+#x1:checked ~ .board .cell-1 .o-mark, #o1:checked ~ .board .cell-1 .x-mark,
+#x2:checked ~ .board .cell-2 .o-mark, #o2:checked ~ .board .cell-2 .x-mark,
+#x3:checked ~ .board .cell-3 .o-mark, #o3:checked ~ .board .cell-3 .x-mark,
+#x4:checked ~ .board .cell-4 .o-mark, #o4:checked ~ .board .cell-4 .x-mark,
+#x5:checked ~ .board .cell-5 .o-mark, #o5:checked ~ .board .cell-5 .x-mark,
+#x6:checked ~ .board .cell-6 .o-mark, #o6:checked ~ .board .cell-6 .x-mark,
+#x7:checked ~ .board .cell-7 .o-mark, #o7:checked ~ .board .cell-7 .x-mark,
+#x8:checked ~ .board .cell-8 .o-mark, #o8:checked ~ .board .cell-8 .x-mark,
+#x9:checked ~ .board .cell-9 .o-mark, #o9:checked ~ .board .cell-9 .x-mark {
+    display: none;
+}
+
+/* Lock in the chosen mark and style it */
+#x1:checked ~ .board .cell-1 .x-mark, #o1:checked ~ .board .cell-1 .o-mark,
+#x2:checked ~ .board .cell-2 .x-mark, #o2:checked ~ .board .cell-2 .o-mark,
+#x3:checked ~ .board .cell-3 .x-mark, #o3:checked ~ .board .cell-3 .o-mark,
+#x4:checked ~ .board .cell-4 .x-mark, #o4:checked ~ .board .cell-4 .o-mark,
+#x5:checked ~ .board .cell-5 .x-mark, #o5:checked ~ .board .cell-5 .o-mark,
+#x6:checked ~ .board .cell-6 .x-mark, #o6:checked ~ .board .cell-6 .o-mark,
+#x7:checked ~ .board .cell-7 .x-mark, #o7:checked ~ .board .cell-7 .o-mark,
+#x8:checked ~ .board .cell-8 .x-mark, #o8:checked ~ .board .cell-8 .o-mark,
+#x9:checked ~ .board .cell-9 .x-mark, #o9:checked ~ .board .cell-9 .o-mark {
+    flex: 100%;
+    font-size: 5rem;
+    cursor: default;
+}
+
+/* Assign colors to the locked marks */
+[id^="x"]:checked ~ .board .x-mark { color: #3b82f6; } /* Blue for X */
+[id^="o"]:checked ~ .board .o-mark { color: #ef4444; } /* Red for O */
+
+
+/* =========================================
+   WIN CONDITION ALGORITHMS
+   ========================================= */
+
+.win-screen {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(17, 24, 39, 0.95);
+    border-radius: 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    animation: popIn 0.3s ease-out forwards;
+}
+
+.win-screen h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.x-wins h2 { color: #3b82f6; }
+.o-wins h2 { color: #ef4444; }
+
+.win-screen button {
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    background: #4b5563;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.win-screen button:hover { background: #6b7280; }
+
+/* The 8 Winning Combinations for X */
+#x1:checked ~ #x2:checked ~ #x3:checked ~ .x-wins, /* Row 1 */
+#x4:checked ~ #x5:checked ~ #x6:checked ~ .x-wins, /* Row 2 */
+#x7:checked ~ #x8:checked ~ #x9:checked ~ .x-wins, /* Row 3 */
+#x1:checked ~ #x4:checked ~ #x7:checked ~ .x-wins, /* Col 1 */
+#x2:checked ~ #x5:checked ~ #x8:checked ~ .x-wins, /* Col 2 */
+#x3:checked ~ #x6:checked ~ #x9:checked ~ .x-wins, /* Col 3 */
+#x1:checked ~ #x5:checked ~ #x9:checked ~ .x-wins, /* Diagonal 1 */
+#x3:checked ~ #x5:checked ~ #x7:checked ~ .x-wins  /* Diagonal 2 */
+{
+    display: flex;
+}
+
+/* The 8 Winning Combinations for O */
+#o1:checked ~ #o2:checked ~ #o3:checked ~ .o-wins, /* Row 1 */
+#o4:checked ~ #o5:checked ~ #o6:checked ~ .o-wins, /* Row 2 */
+#o7:checked ~ #o8:checked ~ #o9:checked ~ .o-wins, /* Row 3 */
+#o1:checked ~ #o4:checked ~ #o7:checked ~ .o-wins, /* Col 1 */
+#o2:checked ~ #o5:checked ~ #o8:checked ~ .o-wins, /* Col 2 */
+#o3:checked ~ #o6:checked ~ #o9:checked ~ .o-wins, /* Col 3 */
+#o1:checked ~ #o5:checked ~ #o9:checked ~ .o-wins, /* Diagonal 1 */
+#o3:checked ~ #o5:checked ~ #o7:checked ~ .o-wins  /* Diagonal 2 */
+{
+    display: flex;
+}
+
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1); }
+}

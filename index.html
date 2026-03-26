@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pure CSS Tic-Tac-Toe</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <main class="game-container">
+        
+        <!-- STATE MANAGEMENT: 9 Checkboxes for X, 9 for O -->
+        <input type="checkbox" id="x1"><input type="checkbox" id="o1">
+        <input type="checkbox" id="x2"><input type="checkbox" id="o2">
+        <input type="checkbox" id="x3"><input type="checkbox" id="o3">
+        <input type="checkbox" id="x4"><input type="checkbox" id="o4">
+        <input type="checkbox" id="x5"><input type="checkbox" id="o5">
+        <input type="checkbox" id="x6"><input type="checkbox" id="o6">
+        <input type="checkbox" id="x7"><input type="checkbox" id="o7">
+        <input type="checkbox" id="x8"><input type="checkbox" id="o8">
+        <input type="checkbox" id="x9"><input type="checkbox" id="o9">
+
+        <div class="board">
+            <!-- Cell 1 -->
+            <div class="cell cell-1">
+                <label for="x1" class="mark x-mark">X</label>
+                <label for="o1" class="mark o-mark">O</label>
+            </div>
+            <!-- Cell 2 -->
+            <div class="cell cell-2">
+                <label for="x2" class="mark x-mark">X</label>
+                <label for="o2" class="mark o-mark">O</label>
+            </div>
+            <!-- Cell 3 -->
+            <div class="cell cell-3">
+                <label for="x3" class="mark x-mark">X</label>
+                <label for="o3" class="mark o-mark">O</label>
+            </div>
+            <!-- Cell 4 -->
+            <div class="cell cell-4">
+                <label for="x4" class="mark x-mark">X</label>
+                <label for="o4" class="mark o-mark">O</label>
+            </div>
+            <!-- Cell 5 -->
+            <div class="cell cell-5">
+                <label for="x5" class="mark x-mark">X</label>
+                <label for="o5" class="mark o-mark">O</label>
+            </div>
+            <!-- Cell 6 -->
+            <div class="cell cell-6">
+                <label for="x6" class="mark x-mark">X</label>
+                <label for="o6" class="mark o-mark">O</label>
+            </div>
+            <!-- Cell 7 -->
+            <div class="cell cell-7">
+                <label for="x7" class="mark x-mark">X</label>
+                <label for="o7" class="mark o-mark">O</label>
+            </div>
+            <!-- Cell 8 -->
+            <div class="cell cell-8">
+                <label for="x8" class="mark x-mark">X</label>
+                <label for="o8" class="mark o-mark">O</label>
+            </div>
+            <!-- Cell 9 -->
+            <div class="cell cell-9">
+                <label for="x9" class="mark x-mark">X</label>
+                <label for="o9" class="mark o-mark">O</label>
+            </div>
+        </div>
+
+        <!-- WIN SCREENS (Hidden by default) -->
+        <div class="win-screen x-wins">
+            <h2>Player X Wins!</h2>
+            <button onclick="location.reload()">Play Again</button>
+        </div>
+        
+        <div class="win-screen o-wins">
+            <h2>Player O Wins!</h2>
+            <button onclick="location.reload()">Play Again</button>
+        </div>
+
+    </main>
+
+</body>
+</html>
