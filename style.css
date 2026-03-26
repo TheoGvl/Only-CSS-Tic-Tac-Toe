@@ -63,9 +63,7 @@ input[type="checkbox"] {
 .o-mark:hover { background: rgba(239, 68, 68, 0.1); color: rgba(239, 68, 68, 0.5); }
 
 
-/* =========================================
-   CELL STATE MANAGEMENT (The "Logic")
-   ========================================= */
+/* CELL STATE MANAGEMENT (The "Logic")*/
 
 /* When X is checked in a cell: Hide O, expand X to fill cell, make text visible */
 #x1:checked ~ .board .cell-1 .o-mark, #o1:checked ~ .board .cell-1 .x-mark,
@@ -100,9 +98,7 @@ input[type="checkbox"] {
 [id^="o"]:checked ~ .board .o-mark { color: #ef4444; } /* Red for O */
 
 
-/* =========================================
-   WIN CONDITION ALGORITHMS
-   ========================================= */
+/*WIN CONDITION ALGORITHMS */
 
 .win-screen {
     display: none; /* Hidden by default */
