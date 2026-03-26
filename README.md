@@ -1,6 +1,6 @@
 # Pure CSS Tic-Tac-Toe
 
-A fully functional, two-player game of Tic-Tac-Toe built completely without JavaScript. This project is a technical demonstration of advanced CSS State Management, DOM parsing, and sibling combinatorial logic.
+A fully functional, two-player game of Tic-Tac-Toe built completely without JavaScript. This project is a technical demonstration of advanced CSS State Management, DOM parsing, and sibling combinatorial logic. I made this to see if i can do it without JavaScript so it can be a bit different from other projects.
 
 ## How It Works
 Instead of using variables in JS to track board state, this project utilizes **18 hidden HTML checkboxes** (9 for Player X, and 9 for Player O). 
